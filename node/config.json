@@ -1,0 +1,281 @@
+{
+    "ociVersion": "0.5.0",
+    "platform": {
+	"os": "linux",
+	"arch": "amd64"
+    },
+    "process": {
+	"terminal": false,
+	"user": {},
+	"args": [
+	    "/usr/local/bin/origin-node-run.sh"
+	],
+	"env": [
+            "OPTIONS=--loglevel=2",
+            "CONFIG_FILE=/etc/origin/node/node-config.yaml",
+            "IMAGE_VERSION=v3.2.0.44",
+            "CONFIG_FILE=/etc/origin/node/node-config.yaml",
+            "OPTIONS=--loglevel=2",
+            "HOST=/rootfs",
+            "HOST_ETC=/host-etc",
+            "container=docker",
+            "PKGM=yum",
+            "PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin",
+            "HOME=/root",
+            "OPENSHIFT_CONTAINERIZED=true",
+            "KUBECONFIG=/etc/origin/node/node.kubeconfig",
+	    "TERM=xterm"
+	],
+	"cwd": "/var/lib/origin",
+	"capabilities": [
+            "CAP_FOWNER",
+            "CAP_FSETID",
+            "CAP_KILL",
+            "CAP_SETGID",
+            "CAP_SETUID",
+            "CAP_SETPCAP",
+            "CAP_LINUX_IMMUTABLE",
+            "CAP_NET_BIND_SERVICE",
+            "CAP_NET_BROADCAST",
+            "CAP_NET_ADMIN",
+            "CAP_NET_RAW",
+            "CAP_IPC_LOCK",
+            "CAP_IPC_OWNER",
+            "CAP_SYS_MODULE",
+            "CAP_SYS_RAWIO",
+            "CAP_SYS_CHROOT",
+            "CAP_SYS_PTRACE",
+            "CAP_SYS_PACCT",
+            "CAP_SYS_ADMIN",
+            "CAP_SYS_BOOT",
+            "CAP_SYS_NICE",
+            "CAP_SYS_RESOURCE",
+            "CAP_SYS_TIME",
+            "CAP_SYS_TTY_CONFIG",
+            "CAP_MKNOD",
+            "CAP_LEASE",
+            "CAP_AUDIT_WRITE",
+            "CAP_AUDIT_CONTROL",
+            "CAP_SETFCAP",
+            "CAP_MAC_OVERRIDE",
+            "CAP_MAC_ADMIN",
+            "CAP_SYSLOG",
+            "CAP_WAKE_ALARM",
+            "CAP_BLOCK_SUSPEND"
+	],
+	"rlimits": [
+	    {
+		"type": "RLIMIT_NOFILE",
+		"hard": 1024,
+		"soft": 1024
+	    }
+	],
+	"noNewPrivileges": true
+    },
+    "root": {
+	"path": "rootfs",
+	"readonly": true
+    },
+    "mounts": [
+        {
+            "destination": "/proc",
+            "type": "proc",
+            "source": "proc"
+        },
+        {
+            "destination": "/dev",
+            "type": "tmpfs",
+            "source": "tmpfs",
+            "options": [
+                "nosuid",
+                "strictatime",
+                "mode=755",
+                "size=65536k"
+            ]
+        },
+        {
+	    "type": "bind",
+	    "source": "/usr/bin/docker-current",
+	    "destination": "/usr/bin/docker-current",
+	    "options": [
+		"rbind",
+		"ro"
+	    ]
+        },
+        {
+	    "type": "bind",
+	    "source": "/etc/localtime",
+	    "destination": "/etc/localtime",
+	    "options": [
+		"rbind",
+		"ro"
+	    ]
+        },
+        {
+	    "type": "bind",
+	    "source": "/usr/bin/docker",
+	    "destination": "/usr/bin/docker",
+	    "options": [
+		"rbind",
+		"ro"
+	    ]
+        },
+        {
+	    "type": "bind",
+	    "source": "/etc/origin/sdn",
+	    "destination": "/etc/openshift-sdn",
+	    "options": [
+		"rbind",
+		"rw",
+		"mode=755"
+	    ]
+        },
+        {
+	    "type": "bind",
+	    "source": "/run",
+	    "destination": "/run",
+	    "options": [
+		"rbind",
+		"rw",
+		"mode=755"
+	    ]
+        },
+        {
+	    "type": "bind",
+	    "source": "/etc/systemd/system",
+	    "destination": "/host-etc/systemd/system",
+	    "options": [
+		"rbind",
+		"rw",
+		"mode=755"
+	    ]
+        },
+        {
+	    "type": "bind",
+	    "source": "/lib/modules",
+	    "destination": "/lib/modules",
+	    "options": [
+		"rbind",
+		"rw",
+		"mode=755"
+	    ]
+        },
+        {
+	    "type": "bind",
+	    "source": "/etc/origin/openvswitch",
+	    "destination": "/etc/openvswitch",
+	    "options": [
+		"rbind",
+		"rw",
+		"mode=755"
+	    ]
+        },
+        {
+	    "type": "bind",
+	    "source": "/var/lib/origin",
+	    "destination": "/var/lib/origin",
+	    "options": [
+		"rbind",
+		"rw",
+		"mode=755"
+	    ]
+        },
+        {
+	    "type": "bind",
+	    "source": "/etc/machine-id",
+	    "destination": "/etc/machine-id",
+	    "options": [
+		"rbind",
+		"ro"
+	    ]
+        },
+        {
+	    "type": "bind",
+	    "source": "/var/lib/docker",
+	    "destination": "/var/lib/docker",
+	    "options": [
+		"rbind",
+		"rw",
+		"mode=755"
+	    ]
+        },
+        {
+	    "type": "bind",
+	    "source": "/var/log",
+	    "destination": "/var/log",
+	    "options": [
+		"rbind",
+		"rw",
+		"mode=755"
+	    ]
+        },
+        {
+	    "type": "bind",
+	    "source": "/dev",
+	    "destination": "/dev",
+	    "options": [
+		"rbind",
+		"rw",
+		"mode=755"
+	    ]
+        },
+        {
+	    "type": "bind",
+	    "source": "/",
+	    "destination": "/rootfs",
+	    "options": [
+		"rbind",
+		"ro"
+	    ]
+        },
+        {
+	    "type": "bind",
+	    "source": "/etc/origin/node",
+	    "destination": "/etc/origin/node",
+	    "options": [
+		"rbind",
+		"rw",
+		"mode=755"
+	    ]
+        },
+        {
+	    "type": "bind",
+	    "source": "/sys",
+	    "destination": "/sys",
+	    "options": [
+		"rbind",
+		"ro"
+	    ]
+        }
+    ],
+    "hooks": {},
+    "linux": {
+	"resources": {
+	    "devices": [
+		{
+		    "allow": false,
+		    "access": "rwm"
+		}
+	    ]
+	},
+	"namespaces": [
+	    {
+		"type": "mount"
+	    }
+	],
+	"maskedPaths": [
+	    "/proc/kcore",
+	    "/proc/latency_stats",
+	    "/proc/timer_stats",
+	    "/proc/sched_debug"
+	],
+	"readonlyPaths": [
+	    "/proc/asound",
+	    "/proc/bus",
+	    "/proc/fs",
+	    "/proc/irq",
+	    "/proc/sysrq-trigger"
+	]
+    }
+}
+
