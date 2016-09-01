@@ -21,42 +21,41 @@ Then you can use the `playbooks/byo/config.yml` playbook in `openshift-ansible`:
 # ansible-playbook -vvv -i my_inventory playbooks/byo/config.yml
 ```
 
-I have used the same machine, 192.168.125.89` both for Master and Node.
+The same machine `192.168.125.89` in the following inventory file is
+used both for Master and Node.  A local Docker registry running on
+`192.168.125.1:5000`.
 
 The resulting file `my_inventory` looks like:
 
 ```
-# This is an example of a bring your own (byo) host inventory
-
-# Create an OSEv3 group that contains the masters and nodes groups
 [OSEv3:children]
 masters
 nodes
 
-# Set variables common for all OSEv3 hosts
 [OSEv3:vars]
-# SSH user, this user should allow ssh based auth without requiring a password
 ansible_ssh_user=cloud-user
-
-# If ansible_ssh_user is not root, ansible_become must be set to true
 ansible_become=yes
+deployment_type=openshift-enterprise
 
-# See DEPLOYMENT_TYPES.md
-deployment_type=atomic-enterprise
+openshift_docker_additional_registries=192.168.125.1:5000
+openshift_docker_insecure_registries=192.168.125.1:5000
+openshift_use_dnsmasq=False
 
-# Pre-release registry URL; note that in the future these images 
-# may have an atomicenterprise/aep- prefix or so.
-oreg_url=rcm-img-docker:5001/openshift3/ose-${component}:${version}
+deployment_type=openshift-enterprise
 
-# Pre-release additional repo
-openshift_additional_repos=[{'id': 'ose-devel', 'name': 'ose-devel', 'baseurl': 'http://buildvm/puddle/build/AtomicOpenShift/3.1/2015-10-27.1', 'enabled': 1, 'gpgcheck': 0}]
+openshift_image_tag=latest
+
+containerized=True
+system_images_registry=192.168.125.1:5000
+use_system_containers=True
+
+openshift_uninstall_images=False
 
 # host group for masters
 [masters]
-192.168.125.69
+192.168.125.89 openshift_schedulable=true
 
 # host group for nodes
 [nodes]
-192.168.125.69
+192.168.125.89
 ```
-
