@@ -2,10 +2,10 @@
 set -euo pipefail
 
 SRC_REGISTRY=registry.access.redhat.com
-SRC_PREFIX=aep3_beta
+SRC_PREFIX=openshift3
 DEST_PREFIX=gscrivano
 
-for i in aep node openvswitch; do
+for i in ose node openvswitch; do
     docker pull $SRC_REGISTRY/$SRC_PREFIX/$i
 done
 
@@ -17,7 +17,7 @@ clean () {
 
 trap clean EXIT
 
-for i in aep node openvswitch; do
+for i in ose node openvswitch; do
     docker run -d --name $NAME_CONTAINER $SRC_REGISTRY/$SRC_PREFIX/$i
     mkdir -p rootfs-$i/exports
     docker export $NAME_CONTAINER | tar -C rootfs-$i -xf -
@@ -27,6 +27,6 @@ for i in aep node openvswitch; do
     docker rm -f $NAME_CONTAINER 
 done
 
-for i in aep node openvswitch; do
+for i in ose node openvswitch; do
     yes | docker push $DEST_PREFIX/$i
 done
