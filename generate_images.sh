@@ -3,7 +3,7 @@ set -euo pipefail
 
 SRC_REGISTRY=registry.access.redhat.com
 SRC_PREFIX=openshift3
-DEST_PREFIX=gscrivano
+DEST_PREFIX=127.0.0.1:5000
 
 for i in ose node openvswitch; do
     docker pull $SRC_REGISTRY/$SRC_PREFIX/$i
