@@ -4,8 +4,6 @@
 
 Used to run OpenShift images Master, Node and OpenVSWitch as system containers.
 
-These images are already uploaded to Docker Hub as `gscrivano/aep`, `gscrivano/node` and `gscrivano/openvswitch` so you can just use the images without rebuilding them.  In facts the Ansible playbook will use them from Docker Hub.
-
 ## Installation
 
 These images can be easily installed with: https://github.com/giuseppe/openshift-ansible/tree/atomic-openshift-system-containers
