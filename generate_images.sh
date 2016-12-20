@@ -5,7 +5,7 @@ SRC_REGISTRY=${SRC_REGISTRY-registry.access.redhat.com}
 SRC_PREFIX=openshift3
 
 SRC_TAG=${SRC_TAG-v3.3.0.26}
-DEST_TAG=latest
+DEST_TAG=${DEST_TAG-v3.3.0.26}
 
 if test $# -eq 0; then
     #docker run -d -p 5000:5000 --restart=always --name registry   -v /etc/registry-certs:/certs \
