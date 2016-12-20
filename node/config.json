@@ -151,6 +151,16 @@
 	    ]
         },
         {
+            "type": "bind",
+            "source": "/var/run/secrets",
+            "destination": "/var/run/secrets",
+            "options": [
+                "rbind",
+                "rw",
+                "mode=755"
+            ]
+        },
+        {
 	    "type": "bind",
 	    "source": "/lib/modules",
 	    "destination": "/lib/modules",
@@ -172,10 +182,11 @@
         },
         {
 	    "type": "bind",
-	    "source": "/var/lib/origin",
-	    "destination": "/var/lib/origin",
+	    "source": "/var/lib",
+	    "destination": "/var/lib",
 	    "options": [
-		"rbind",
+		"bind",
+		"shared",
 		"rw",
 		"mode=755"
 	    ]
@@ -259,6 +270,7 @@
     ],
     "hooks": {},
     "linux": {
+	"rootfsPropagation" : "shared",
 	"resources": {
 	    "devices": [
 		{
