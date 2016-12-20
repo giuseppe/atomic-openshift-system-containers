@@ -34,7 +34,7 @@ for i in ose node openvswitch; do
     mkdir -p rootfs-$i/exports
     docker export $NAME_CONTAINER | tar -C rootfs-$i -xf -
     cp $i/config.json rootfs-$i/exports
-    tar -C rootfs-$i --to-stdout -c . | docker import - $DEST_PREFIX/$i:$DEST_TAG
+    tar -C rootfs-$i --to-stdout -c . | docker import -c "ENTRYPOINT /usr/bin/openshift" - $DEST_PREFIX/$i:$DEST_TAG
     rm -rf rootfs-$i
     docker rm -f $NAME_CONTAINER
 done
