@@ -24,19 +24,17 @@ done
 NAME_CONTAINER=builder-$$
 
 clean () {
-    docker ps | grep -q $NAME_CONTAINER && docker rm -f $NAME_CONTAINER 
+    rm -rf _build
 }
 
 trap clean EXIT
 
 for i in ose node openvswitch; do
-    docker run -d --name $NAME_CONTAINER $SRC_REGISTRY/$SRC_PREFIX/$i:$SRC_TAG
-    mkdir -p rootfs-$i/exports
-    docker export $NAME_CONTAINER | tar -C rootfs-$i -xf -
-    cp $i/config.json rootfs-$i/exports
-    tar -C rootfs-$i --to-stdout -c . | docker import -c "ENTRYPOINT /usr/bin/openshift" - $DEST_PREFIX/$i:$DEST_TAG
-    rm -rf rootfs-$i
-    docker rm -f $NAME_CONTAINER
+    rm -rf _build
+    mkdir _build
+    cp $i/config.json _build
+    printf "FROM $SRC_REGISTRY/$SRC_PREFIX/$i:$SRC_TAG\nCOPY config.json /exports/config.json" > _build/Dockerfile
+    docker build -t $DEST_PREFIX/$i:$DEST_TAG _build
 done
 
 set +euo pipefail
