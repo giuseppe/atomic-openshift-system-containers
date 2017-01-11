@@ -6,7 +6,7 @@ Used to run OpenShift images Master, Node and OpenVSWitch as system containers.
 
 ## Installation
 
-These images can be easily installed with: https://github.com/giuseppe/openshift-ansible/tree/atomic-openshift-system-containers
+These images can be easily installed with: https://github.com/giuseppe/openshift-ansible/tree/system-containers
 
 Ensure /dev/atomicos/root has enough space to pull these images, you will need to run for an additional GB:
 ```
