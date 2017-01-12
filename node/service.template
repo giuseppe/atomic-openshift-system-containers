@@ -18,6 +18,8 @@ ExecStop=$EXEC_STOP
 SyslogIdentifier=$NAME
 Restart=always
 RestartSec=5s
+WorkingDirectory=$DESTDIR
+RuntimeDirectory=${NAME}
 
 [Install]
 WantedBy=docker.service
