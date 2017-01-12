@@ -1,0 +1,2 @@
+FROM $ORIGIN
+COPY config.json /exports/config.json

@@ -32,8 +32,9 @@ trap clean EXIT
 for i in ose node openvswitch; do
     rm -rf _build
     mkdir _build
-    cp $i/config.json _build
-    printf "FROM $SRC_REGISTRY/$SRC_PREFIX/$i:$SRC_TAG\nCOPY config.json /exports/config.json" > _build/Dockerfile
+    cp $i/* _build
+    sed -e "s|\$ORIGIN|$SRC_REGISTRY/$SRC_PREFIX/$i:$SRC_TAG|g" < _build/Dockerfile.in > _build/Dockerfile
+    cat _build/Dockerfile
     docker build -t $DEST_PREFIX/$i:$DEST_TAG _build
 done
 

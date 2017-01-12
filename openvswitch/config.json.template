@@ -1,5 +1,5 @@
 {
-    "ociVersion": "1.0.0",
+    "ociVersion": "0.5.0",
     "platform": {
 	"os": "linux",
 	"arch": "amd64"
@@ -8,12 +8,11 @@
 	"terminal": false,
 	"user": {},
 	"args": [
-	    "/usr/local/bin/system-container-wrapper.sh"
+	    "/usr/local/bin/ovs-run.sh"
 	],
 	"env": [
             "container=docker",
             "PKGM=yum",
-            "NAME=$NAME",
             "PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin",
 	    "TERM=xterm"
 	],
