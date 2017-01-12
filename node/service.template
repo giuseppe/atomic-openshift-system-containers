@@ -1,0 +1,23 @@
+[Unit]
+After=atomic-openshift-master.service
+After=docker.service
+After=openvswitch.service
+PartOf=docker.service
+Requires=docker.service
+Requires=openvswitch.service
+Wants=atomic-openshift-master.service
+Requires=atomic-openshift-node-dep.service
+After=atomic-openshift-node-dep.service
+
+[Service]
+EnvironmentFile=/etc/sysconfig/atomic-openshift-node
+EnvironmentFile=/etc/sysconfig/atomic-openshift-node-dep
+ExecStartPre=/bin/bash -c 'export -p > /run/$NAME-env'
+ExecStart=$EXEC_START
+ExecStop=$EXEC_STOP
+SyslogIdentifier=$NAME
+Restart=always
+RestartSec=5s
+
+[Install]
+WantedBy=docker.service

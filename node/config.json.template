@@ -8,18 +8,14 @@
 	"terminal": false,
 	"user": {},
 	"args": [
-	    "/usr/local/bin/origin-node-run.sh"
+	    "/usr/local/bin/system-container-wrapper.sh"
 	],
 	"env": [
-            "OPTIONS=--loglevel=2",
-            "CONFIG_FILE=/etc/origin/node/node-config.yaml",
-            "IMAGE_VERSION=v3.2.0.44",
-            "CONFIG_FILE=/etc/origin/node/node-config.yaml",
-            "OPTIONS=--loglevel=2",
             "HOST=/rootfs",
             "HOST_ETC=/host-etc",
             "container=docker",
             "PKGM=yum",
+            "NAME=$NAME",
             "PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin",
             "HOME=/root",
             "OPENSHIFT_CONTAINERIZED=true",
