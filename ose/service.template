@@ -1,0 +1,19 @@
+[Unit]
+After=docker.service
+Requires=docker.service
+PartOf=docker.service
+
+[Service]
+EnvironmentFile=-/etc/sysconfig/atomic-openshift-master
+EnvironmentFile=-/etc/sysconfig/atomic-openshift-node-dep
+ExecStartPre=/bin/bash -c 'export -p > /run/$NAME-env'
+ExecStart=$EXEC_START
+ExecStop=$EXEC_STOP
+SyslogIdentifier=$NAME
+Restart=always
+RestartSec=5s
+WorkingDirectory=$DESTDIR
+RuntimeDirectory=${NAME}
+
+[Install]
+WantedBy=docker.service

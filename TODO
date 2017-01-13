@@ -1,1 +1,2 @@
 * Support $DOCKER_ADDTL_BIND_MOUNTS
+* Fix etcd_container.service dependency on master
