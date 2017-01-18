@@ -148,8 +148,8 @@
         },
 	{
 	    "type": "bind",
-	    "source": "/var/run/docker.sock",
-	    "destination": "/var/run/docker.sock",
+	    "source": "/var/run",
+	    "destination": "/var/run",
 	    "options": [
 		"rbind",
 		"rw",
