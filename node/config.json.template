@@ -242,6 +242,15 @@
         },
         {
 	    "type": "bind",
+	    "source": "/etc/resolv.conf",
+	    "destination": "/etc/resolv.conf",
+	    "options": [
+		"bind",
+		"ro"
+	    ]
+        },
+        {
+	    "type": "bind",
 	    "source": "/var/lib/docker",
 	    "destination": "/var/lib/docker",
 	    "options": [
