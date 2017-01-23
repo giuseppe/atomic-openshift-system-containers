@@ -1,5 +1,5 @@
 {
-    "ociVersion": "0.5.0",
+    "ociVersion": "1.0.0",
     "platform": {
 	"os": "linux",
 	"arch": "amd64"
@@ -73,21 +73,65 @@
 	"readonly": true
     },
     "mounts": [
+	{
+	    "destination": "/dev",
+	    "type": "tmpfs",
+	    "source": "tmpfs",
+	    "options": [
+		"nosuid",
+		"strictatime",
+		"mode=755",
+		"size=65536k"
+	    ]
+	},
+	{
+	    "destination": "/dev/pts",
+	    "type": "devpts",
+	    "source": "devpts",
+	    "options": [
+		"nosuid",
+		"noexec",
+		"newinstance",
+		"ptmxmode=0666",
+		"mode=0620",
+		"gid=5"
+	    ]
+	},
+	{
+	    "destination": "/dev/shm",
+	    "type": "tmpfs",
+	    "source": "shm",
+	    "options": [
+		"nosuid",
+		"noexec",
+		"nodev",
+		"mode=1777",
+		"size=65536k"
+	    ]
+	},
+	{
+	    "destination": "/dev/mqueue",
+	    "type": "mqueue",
+	    "source": "mqueue",
+	    "options": [
+		"nosuid",
+		"noexec",
+		"nodev"
+	    ]
+	},
         {
             "destination": "/proc",
             "type": "proc",
             "source": "proc"
         },
         {
-            "destination": "/dev",
-            "type": "tmpfs",
-            "source": "tmpfs",
-            "options": [
-                "nosuid",
-                "strictatime",
-                "mode=755",
-                "size=65536k"
-            ]
+	    "type": "rbind",
+	    "source": "/sys",
+	    "destination": "/sys",
+	    "options": [
+		"rbind",
+		"rw"
+	    ]
         },
         {
 	    "type": "bind",
@@ -178,11 +222,11 @@
         },
         {
 	    "type": "bind",
-	    "source": "/var/lib",
-	    "destination": "/var/lib",
+	    "source": "/var/lib/origin",
+	    "destination": "/var/lib/origin",
 	    "options": [
-		"bind",
-		"shared",
+		"rbind",
+		"rslave",
 		"rw",
 		"mode=755"
 	    ]
@@ -201,7 +245,7 @@
 	    "source": "/var/lib/docker",
 	    "destination": "/var/lib/docker",
 	    "options": [
-		"rbind",
+		"bind",
 		"rw",
 		"mode=755"
 	    ]
@@ -218,20 +262,11 @@
         },
         {
 	    "type": "bind",
-	    "source": "/dev",
-	    "destination": "/dev",
-	    "options": [
-		"rbind",
-		"rw",
-		"mode=755"
-	    ]
-        },
-        {
-	    "type": "bind",
 	    "source": "/",
 	    "destination": "/rootfs",
 	    "options": [
 		"rbind",
+                "rprivate",
 		"ro"
 	    ]
         },
@@ -253,20 +288,11 @@
 		"mode=755",
 		"size=65536k"
 	    ]
-	},
-        {
-	    "type": "bind",
-	    "source": "/sys",
-	    "destination": "/sys",
-	    "options": [
-		"rbind",
-		"ro"
-	    ]
-        }
+	}
     ],
     "hooks": {},
     "linux": {
-	"rootfsPropagation" : "shared",
+	"rootfsPropagation" : "rslave",
 	"resources": {
 	    "devices": [
 		{
