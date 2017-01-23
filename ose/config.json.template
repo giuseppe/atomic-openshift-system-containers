@@ -115,12 +115,21 @@
 		"ro"
 	    ]
 	},
+        {
+	    "type": "bind",
+	    "source": "/etc/resolv.conf",
+	    "destination": "/etc/resolv.conf",
+	    "options": [
+		"rbind",
+		"ro"
+	    ]
+        },
 	{
 	    "type": "bind",
 	    "source": "/etc/origin",
 	    "destination": "/etc/origin",
 	    "options": [
-		"rbind",
+		"bind",
 		"rw",
 		"mode=755"
 	    ]
