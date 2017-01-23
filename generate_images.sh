@@ -6,6 +6,7 @@ SRC_PREFIX=openshift3
 
 SRC_TAG=${SRC_TAG-v3.3.0.26}
 DEST_TAG=${DEST_TAG-v3.3.0.26}
+NO_PULL=${NO_PULL-}
 
 if test $# -eq 0; then
     #docker run -d -p 5000:5000 --restart=always --name registry   -v /etc/registry-certs:/certs \
@@ -17,9 +18,11 @@ fi
 
 DEST_PREFIX=$1/$SRC_PREFIX
 
-for i in ose node openvswitch; do
-    docker pull $SRC_REGISTRY/$SRC_PREFIX/$i:$SRC_TAG
-done
+if test x$NO_PULL != x1; then
+    for i in ose node openvswitch; do
+        docker pull $SRC_REGISTRY/$SRC_PREFIX/$i:$SRC_TAG
+    done
+fi
 
 NAME_CONTAINER=builder-$$
 
