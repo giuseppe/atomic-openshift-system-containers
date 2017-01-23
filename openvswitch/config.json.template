@@ -127,6 +127,15 @@
         },
         {
 	    "type": "bind",
+	    "source": "/etc/resolv.conf",
+	    "destination": "/etc/resolv.conf",
+	    "options": [
+		"bind",
+		"ro"
+	    ]
+        },
+        {
+	    "type": "bind",
 	    "source": "/dev",
 	    "destination": "/dev",
 	    "options": [
