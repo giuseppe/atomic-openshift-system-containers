@@ -5,9 +5,8 @@ After=openvswitch.service
 PartOf=docker.service
 Requires=docker.service
 Requires=openvswitch.service
-Wants=atomic-openshift-master.service
-Requires=atomic-openshift-node-dep.service
-After=atomic-openshift-node-dep.service
+Requires=$NAME-dep.service
+After=$NAME-dep.service
 
 [Service]
 EnvironmentFile=/etc/sysconfig/$NAME
