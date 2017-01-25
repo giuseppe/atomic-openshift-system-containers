@@ -10,8 +10,8 @@ Requires=atomic-openshift-node-dep.service
 After=atomic-openshift-node-dep.service
 
 [Service]
-EnvironmentFile=/etc/sysconfig/atomic-openshift-node
-EnvironmentFile=/etc/sysconfig/atomic-openshift-node-dep
+EnvironmentFile=/etc/sysconfig/$NAME
+EnvironmentFile=/etc/sysconfig/$NAME-dep
 ExecStartPre=/bin/bash -c 'export -p > /run/$NAME-env'
 ExecStart=$EXEC_START
 ExecStop=$EXEC_STOP
