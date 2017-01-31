@@ -24,6 +24,7 @@
 	],
 	"cwd": "/var/lib/origin",
 	"capabilities": [
+            "CAP_CHOWN",
             "CAP_FOWNER",
             "CAP_FSETID",
             "CAP_KILL",
