@@ -232,6 +232,17 @@
 	    ]
         },
         {
+            "type": "bind",
+            "source": "/var/lib/cni",
+            "destination": "/var/lib/cni",
+            "options": [
+                "bind",
+                "slave",
+                "rw",
+                "mode=777"
+            ]
+        },
+        {
 	    "type": "bind",
 	    "source": "/etc/machine-id",
 	    "destination": "/etc/machine-id",
