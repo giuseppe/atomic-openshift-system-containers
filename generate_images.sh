@@ -10,9 +10,11 @@ MASTER_IMAGE=${MASTER_IMAGE-ose}
 NO_PULL=${NO_PULL-}
 
 if test $# -eq 0; then
+    # mkdir -p  /etc/registry-certs
+    # cd /etc/registry-certs && openssl req -newkey rsa:4096 -nodes -sha256 -keyout server.key  -x509 -days 3650 -out server.crt
     #docker run -d -p 5000:5000 --restart=always --name registry   -v /etc/registry-certs:/certs \
-    #-e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/server.crt -e REGISTRY_HTTP_TLS_KEY=/certs/server.key \
-    #-v /var/lib/storage/registry/:/var/lib/registry:Z \registry:2
+    #  -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/server.crt -e REGISTRY_HTTP_TLS_KEY=/certs/server.key \
+    #  -v /var/lib/storage/registry/:/var/lib/registry:Z \registry:2
     echo "Please specify a destination registry"
     exit 1
 fi
