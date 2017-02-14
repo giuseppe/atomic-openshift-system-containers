@@ -1,5 +1,11 @@
 # atomic-openshift-system-containers (Not ready for production)
 
+## UPDATE
+
+Some of these changes are already part of the OpenShift Origin images
+
+# Description
+
 (Dirty) script to convert some OpenShift images to system containers and push them.
 
 Used to run OpenShift images Master, Node and OpenVSWitch as system containers.
