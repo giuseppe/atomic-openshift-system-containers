@@ -1,3 +1,5 @@
+# ansible-playbook -v -i origin.inventory ./playbooks/byo/config.yml -vvvv
+# https://koji.fedoraproject.org/koji/buildinfo?buildID=815150
 # Create an OSEv3 group that contains the masters and nodes groups
 [OSEv3:children]
 masters
@@ -7,31 +9,27 @@ etcd
 # Set variables common for all OSEv3 hosts
 [OSEv3:vars]
 ansible_user=root
-ansible_ssh_user=root
+ansible_become=yes
+ansible_ssh_user=vagrant
 containerized=true
 openshift_image_tag=latest
 openshift_release=latest
 openshift_router_selector='router=true'
 openshift_registry_selector='registry=true'
-#openshift_master_default_subdomain=fedoralocalorigin.io
-#openshift_use_dnsmasq=False
-#osm_etcd_image=192.168.125.1:5000/rhel7/etcd
-openshift_docker_additional_registries=10.3.9.116:5000
-openshift_docker_insecure_registries=10.3.9.116:5000
+#openshift_docker_additional_registries=10.3.9.116:5000
+#openshift_docker_insecure_registries=10.3.9.116:5000
 openshift_install_examples=False
 
 deployment_type=origin
 
 ###########################################################
-############## SYSTEM CONTAINERS ##########################
+#######SYSTEM CONTAINERS###################################
 ###########################################################
 system_images_registry=docker.io
 use_system_containers=True
-#use_openvswitch_system_container=True
-#use_node_system_container=True
-#use_master_system_container=True
 ##########################################################
-###########################################################
+##########################################################
+##########################################################
 
 # enable htpasswd auth
 openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider', 'filename': '/etc/origin/master/htpasswd'}]
@@ -39,15 +37,15 @@ openshift_master_htpasswd_users={'admin': '$apr1$zgSjCrLt$1KSuj66CggeWSv.D.BXOA1
 
 # host group for masters
 [masters]
-172.17.166.3 openshift_hostname=172.17.166.3
+10.0.0.10 openshift_hostname=10.0.0.10
 
 # host group for etcd, should run on a node that is not schedulable
 [etcd]
-172.17.166.3 openshift_hostname=172.17.166.3
+10.0.0.10 openshift_ip=10.0.0.10
 
 # host group for worker nodes, we list master node here so that
 # openshift-sdn gets installed. We mark the master node as not
 # schedulable.
 [nodes]
-172.17.166.4 openshift_hostname=172.17.166.4 openshift_schedulable=true openshift_node_labels="{'region': 'primary', 'router':'true'}"
-172.17.166.5 openshift_hostname=172.17.166.5 openshift_schedulable=true openshift_node_labels="{'region': 'primary', 'registry':'true'}"
+10.0.0.11 openshift_hostname=10.0.0.11 openshift_schedulable=true openshift_node_labels="{'region': 'primary', 'router':'true'}"
+10.0.0.12 openshift_hostname=10.0.0.12 openshift_schedulable=true openshift_node_labels="{'region': 'primary', 'registry':'true'}"
