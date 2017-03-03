@@ -2,7 +2,9 @@
 
 ## UPDATE
 
-Some of these changes are already part of the OpenShift Origin images
+Some of these changes are already part of the OpenShift Origin images.
+
+You can use the images here for installing Origin as system container: https://hub.docker.com/r/openshift/
 
 # Description
 
