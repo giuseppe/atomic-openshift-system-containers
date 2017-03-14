@@ -10,7 +10,6 @@ ExecStart=$EXEC_START
 ExecStop=$EXEC_STOP
 SyslogIdentifier=$NAME
 Restart=always
-RestartSec=5s
 WorkingDirectory=$DESTDIR
 RuntimeDirectory=${NAME}
 
