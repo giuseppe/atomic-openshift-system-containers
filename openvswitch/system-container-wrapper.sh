@@ -9,7 +9,7 @@ MAINPID=`sed -n -e "/^PPid/ s|PPid:\t||p" /proc/$$/status`
 # Newer versions of systemd-notify don't have this issue, and also this change in runc,
 # even if addressing another issue: https://github.com/opencontainers/runc/pull/1308
 # will ensure once it gets in a release that the notify events are properly propagated.
-if test -e /run/systemd/notify; then
+if test -n ${NOTIFY_SOCKET-}; then
     /usr/share/openvswitch/scripts/ovs-ctl status
     while /usr/share/openvswitch/scripts/ovs-ctl status | grep -q "not running"; do
         sleep 1
